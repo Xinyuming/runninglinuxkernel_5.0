@@ -48455,8 +48455,6 @@ main:
 	.string	"__reserved"
 .LASF927:
 	.string	"_sigfault"
-.LASF1901:
-	.string	"i_wb_frn_avg_time"
 .LASF2374:
 	.string	"completions"
 .LASF882:
@@ -50413,8 +50411,8 @@ main:
 	.string	"free"
 .LASF2625:
 	.string	"attribute"
-.LASF4504:
-	.string	"/home/xym/workspace/test/runninglinuxkernel_5.0"
+.LASF1901:
+	.string	"i_wb_frn_avg_time"
 .LASF2986:
 	.string	"device_irq_level"
 .LASF2322:
@@ -54797,6 +54795,8 @@ main:
 	.string	"ZONELIST_FALLBACK"
 .LASF1256:
 	.string	"oom_group"
+.LASF4504:
+	.string	"/home/xym/workspace/runninglinuxkernel_5.0"
 .LASF365:
 	.string	"num_trace_bprintk_fmt"
 .LASF4265:

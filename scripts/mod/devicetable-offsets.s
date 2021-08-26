@@ -1538,14 +1538,14 @@ main:
 	.string	"uuid_index"
 .LASF11:
 	.string	"_Bool"
+.LASF20:
+	.string	"/home/xym/workspace/runninglinuxkernel_5.0"
 .LASF6:
 	.string	"short unsigned int"
 .LASF3:
 	.string	"signed char"
 .LASF19:
 	.string	"scripts/mod/devicetable-offsets.c"
-.LASF20:
-	.string	"/home/xym/workspace/test/runninglinuxkernel_5.0"
 .LASF5:
 	.string	"short int"
 	.ident	"GCC: (Ubuntu/Linaro 8.4.0-1ubuntu1~18.04) 8.4.0"

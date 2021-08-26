@@ -1209,8 +1209,6 @@ main:
 	.string	"PG_workingset"
 .LASF13:
 	.string	"pstate_check_t"
-.LASF110:
-	.string	"/home/xym/workspace/test/runninglinuxkernel_5.0"
 .LASF105:
 	.string	"__MAX_NR_ZONES"
 .LASF4:
@@ -1309,8 +1307,8 @@ main:
 	.string	"panic_print"
 .LASF23:
 	.string	"initcall_debug"
-.LASF76:
-	.string	"PG_error"
+.LASF110:
+	.string	"/home/xym/workspace/runninglinuxkernel_5.0"
 .LASF83:
 	.string	"PG_writeback"
 .LASF102:
@@ -1321,6 +1319,8 @@ main:
 	.string	"dmesg_restrict"
 .LASF49:
 	.string	"root_mountflags"
+.LASF76:
+	.string	"PG_error"
 .LASF38:
 	.string	"oops_in_progress"
 .LASF60:
