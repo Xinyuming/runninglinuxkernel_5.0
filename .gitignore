@@ -52,3 +52,4 @@ vmlinux
 .tmp*
 .version
 System.map
+rootfs_debian_arm64.ext4
