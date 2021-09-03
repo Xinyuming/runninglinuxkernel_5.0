@@ -4362,7 +4362,7 @@ __alloc_pages_slowpath(gfp_t gfp_mask, unsigned int order,
 	int no_progress_loops;
 	unsigned int cpuset_mems_cookie;
 	int reserve_flags;
-	mprint("can_direct_reclaim %d\n",can_direct_reclaim);
+	
 	/*
 	 * We also sanity check to catch abuse of atomic reserves being used by
 	 * callers that are not in atomic context.
@@ -4397,7 +4397,8 @@ retry_cpuset:
 		goto nopage;
 
 	print_ac(ac);
-
+	if(get_flag_main())
+		goto test;
 	if (alloc_flags & ALLOC_KSWAPD)
 		wake_all_kswapds(order, gfp_mask, ac);
 	/*
@@ -4407,7 +4408,7 @@ retry_cpuset:
 	page = get_page_from_freelist(gfp_mask, order, alloc_flags, ac);
 	if (page)
 		goto got_pg;
-
+test:
 	/*
 	 * For costly allocations, try direct compaction first, as it's likely
 	 * that we have enough base pages and don't need to reclaim. For non-
@@ -4417,6 +4418,7 @@ retry_cpuset:
 	 * Don't try this for allocations that are allowed to ignore
 	 * watermarks, as the ALLOC_NO_WATERMARKS attempt didn't yet happen.
 	 */
+	mprint("can_direct_reclaim %d costly_order %d order %d ac->migratetype %d gfp_pfmemalloc_allowed(gfp_mask) %d\n",can_direct_reclaim,costly_order,costly_order,ac->migratetype,gfp_pfmemalloc_allowed(gfp_mask));
 	if (can_direct_reclaim &&
 			(costly_order ||
 			   (order > 0 && ac->migratetype != MIGRATE_MOVABLE))

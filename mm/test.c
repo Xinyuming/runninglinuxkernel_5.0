@@ -293,12 +293,12 @@ int __init mem_test(void)
    print_node();
    print_orders(3,5);
    set_flag_main(1);
-   // for( i = 0;i<10;i++)
-   // {
-   //    msleep(1000);
-   //  page1 = alloc_pages(GFP_KERNEL, 3);
-   // pr_info("page1 %llx\n",(u64)page1);
-   // }
+   for( i = 0;i<10;i++)
+   {
+      msleep(1000);
+    page1 = alloc_pages(GFP_KERNEL, 3);
+   pr_info("page1 %llx\n",(u64)page1);
+   }
    // print_orders(3,5);
    // page2 = alloc_pages(GFP_KERNEL, 4);
 

@@ -3946,6 +3946,7 @@ static int kswapd(void *p)
 		alloc_order = reclaim_order = pgdat->kswapd_order;
 		classzone_idx = kswapd_classzone_idx(pgdat, classzone_idx);
 		pr_info("wake up before --- alloc_order %d reclaim_order %d pgdat->kswapd_order %d\n",alloc_order,reclaim_order,pgdat->kswapd_order);
+		return 0;
 kswapd_try_sleep:
 		kswapd_try_to_sleep(pgdat, alloc_order, reclaim_order,
 					classzone_idx);

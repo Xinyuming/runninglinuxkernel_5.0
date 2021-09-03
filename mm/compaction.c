@@ -1541,7 +1541,7 @@ static enum compact_result compact_zone(struct zone *zone, struct compact_contro
 	unsigned long end_pfn = zone_end_pfn(zone);
 	const bool sync = cc->mode != MIGRATE_ASYNC;
 
-	cc->migratetype = gfpflags_to_migratetype(cc->gfp_mask);
+	cc->migratetype = gfpflags_to_migratetype(cc->gfp_mask);mprint("cc->migratetype %d\n",cc->migratetype);
 	ret = compaction_suitable(zone, cc->order, cc->alloc_flags,
 							cc->classzone_idx);
 	/* Compaction is likely to fail */
@@ -1566,7 +1566,7 @@ static enum compact_result compact_zone(struct zone *zone, struct compact_contro
 	 */
 	if (cc->whole_zone) {
 		cc->migrate_pfn = start_pfn;
-		cc->free_pfn = pageblock_start_pfn(end_pfn - 1);
+		cc->free_pfn = pageblock_start_pfn(end_pfn - 1);mprint("cc->migrate_pfn 0x%llX cc->free_pfn 0x%llX\n",cc->migrate_pfn,cc->free_pfn);
 	} else {
 		cc->migrate_pfn = zone->compact_cached_migrate_pfn[sync];
 		cc->free_pfn = zone->compact_cached_free_pfn;
@@ -1771,7 +1771,6 @@ enum compact_result try_to_compact_pages(gfp_t gfp_mask, unsigned int order,
 			rc = max_t(enum compact_result, COMPACT_DEFERRED, rc);
 			continue;
 		}
-
 		status = compact_zone_order(zone, order, gfp_mask, prio,
 					alloc_flags, ac_classzone_idx(ac));
 		rc = max(status, rc);
