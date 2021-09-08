@@ -528,7 +528,7 @@ static void __init mm_init(void)
 	 */
 	page_ext_init_flatmem();
 	mem_init();
-//	print_node();
+	print_node();
 	kmem_cache_init();
 	pgtable_init();
 	debug_objects_mem_init();

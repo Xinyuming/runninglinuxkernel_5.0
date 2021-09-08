@@ -286,20 +286,20 @@ int __init mem_test(void)
    // struct page *page2 = NULL;
    // struct page *page3 = NULL;
    pr_info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> test +++++++++++++++++++++++++++++++\n");
-   alloc_prepare();
-   print_node();
-   alloc_lruvec_pages();
-   print_lruvec(get_lruvec());
-   print_node();
+   // alloc_prepare();
+   // print_node();
+   // alloc_lruvec_pages();
+   // print_lruvec(get_lruvec());
+   // print_node();
    print_orders(3,5);
    set_flag_main(1);
-   for( i = 0;i<10;i++)
-   {
-      msleep(1000);
-    page1 = alloc_pages(GFP_KERNEL, 3);
-   pr_info("page1 %llx\n",(u64)page1);
-   }
-   // print_orders(3,5);
+   //for( i = 0;i<10;i++)
+   //{
+   //   msleep(1000);
+         page1 = alloc_pages(GFP_KERNEL, 3);
+         pr_info("page1 %llx\n",(u64)page1);
+  // }
+   print_orders(3,5);
    // page2 = alloc_pages(GFP_KERNEL, 4);
 
    // print_orders(3,5);

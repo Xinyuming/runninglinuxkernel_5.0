@@ -37,9 +37,9 @@
 #define PAGE_ALLOC_COSTLY_ORDER 3
 
 enum migratetype {
-	MIGRATE_UNMOVABLE,
-	MIGRATE_MOVABLE,
-	MIGRATE_RECLAIMABLE,
+	MIGRATE_UNMOVABLE, 	//不可移动页面，多用于内核使用的页面
+	MIGRATE_MOVABLE,		//可移动页面，多用于用户使用的页面，该页面可以被移动，可以在用户无感知的情况下进行页面的重新映射
+	MIGRATE_RECLAIMABLE, //可回收页面
 	MIGRATE_PCPTYPES,	/* the number of types on the pcp lists */
 	MIGRATE_HIGHATOMIC = MIGRATE_PCPTYPES,
 #ifdef CONFIG_CMA

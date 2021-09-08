@@ -897,11 +897,7 @@ static inline int page_is_buddy(struct page *page, struct page *buddy,
  *
  * -- nyc
  */
-
-static inline void __free_one_page(struct page *page,
-		unsigned long pfn,
-		struct zone *zone, unsigned int order,
-		int migratetype)
+static inline void __free_one_page(struct page *page,unsigned long pfn,struct zone *zone, unsigned int order,int migratetype)
 {
 	unsigned long combined_pfn;
 	unsigned long uninitialized_var(buddy_pfn);
@@ -1418,6 +1414,7 @@ static void __init __free_pages_boot_core(struct page *page, unsigned int order)
 
 	atomic_long_add(nr_pages, &page_zone(page)->managed_pages);
 	set_page_refcounted(page);
+	
 	__free_pages(page, order);
 }
 
@@ -1480,6 +1477,7 @@ void __init memblock_free_pages(struct page *page, unsigned long pfn,
 {
 	if (early_page_uninitialised(pfn))
 		return;
+		
 	return __free_pages_boot_core(page, order);
 }
 

@@ -1884,8 +1884,6 @@ static void __init_memblock memblock_dump(struct memblock_type *type)
 
 void __init_memblock __memblock_dump_all(void)
 {
-//	if(is_print())
-	{
 		pr_info("MEMBLOCK configuration:\n");
 		pr_info(" memory size = %pa reserved size = %pa\n",
 			&memblock.memory.total_size,
@@ -1896,8 +1894,6 @@ void __init_memblock __memblock_dump_all(void)
 	#ifdef CONFIG_HAVE_MEMBLOCK_PHYS_MAP
 		memblock_dump(&memblock.physmem);
 	#endif
-	}
-
 }
 
 void __init memblock_allow_resize(void)
@@ -1937,6 +1933,8 @@ static unsigned long __init __free_memory_core(phys_addr_t start,
 	unsigned long end_pfn = min_t(unsigned long,
 				      PFN_DOWN(end), max_low_pfn);
 
+	pr_err("start_pfn %lx end_pfn %lx\n",start_pfn,end_pfn);
+
 	if (start_pfn >= end_pfn)
 		return 0;
 	__free_pages_memory(start_pfn, end_pfn);
@@ -1953,19 +1951,18 @@ static unsigned long __init free_low_memory_core_early(void)
 	memblock_clear_hotplug(0, -1);
 	for_each_reserved_mem_region(i, &start, &end)
 		reserve_bootmem_region(start, end);
-__memblock_dump_all();
+
+	__memblock_dump_all();
 	/*
 	 * We need to use NUMA_NO_NODE instead of NODE_DATA(0)->node_id
 	 *  because in some case like Node0 doesn't have RAM installed
 	 *  low ram will be on Node1
 	 */
-	for_each_free_mem_range(i, NUMA_NO_NODE, MEMBLOCK_NONE, &start, &end,
-				NULL)
-				{
-					//pr_err("start %llx end %llx\n",start,end);
+	for_each_free_mem_range(i, NUMA_NO_NODE, MEMBLOCK_NONE, &start, &end,NULL)
+	{
+		pr_err("start %llx end %llx\n",start,end);
 		count += __free_memory_core(start, end);
-
-				}
+	}
 
 	return count;
 }
