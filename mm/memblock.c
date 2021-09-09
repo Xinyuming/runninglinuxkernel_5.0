@@ -1914,11 +1914,12 @@ static void __init __free_pages_memory(unsigned long start, unsigned long end)
 	int order;
 	while (start < end) {
 		//ffs从bit0开始
+		pr_info("__ffs(start) %d\n",__ffs(start));
 		order = min(MAX_ORDER - 1UL, __ffs(start));
 		while (start + (1UL << order) > end)
 			order--;
 
-		//pr_err("start_pfn %lx end_pfn %lx,order %d\n",start,end,order);
+		pr_err("start_pfn %lx end_pfn %lx,order %d\n",start,end,order);
 
 		memblock_free_pages(pfn_to_page(start), start, order);
 
@@ -1933,7 +1934,7 @@ static unsigned long __init __free_memory_core(phys_addr_t start,
 	unsigned long end_pfn = min_t(unsigned long,
 				      PFN_DOWN(end), max_low_pfn);
 
-	pr_err("start_pfn %lx end_pfn %lx\n",start_pfn,end_pfn);
+	//pr_err("start_pfn 0x%lx end_pfn 0x%lx %ld\n",start_pfn,end_pfn,(end_pfn-start_pfn));
 
 	if (start_pfn >= end_pfn)
 		return 0;
@@ -1960,7 +1961,7 @@ static unsigned long __init free_low_memory_core_early(void)
 	 */
 	for_each_free_mem_range(i, NUMA_NO_NODE, MEMBLOCK_NONE, &start, &end,NULL)
 	{
-		pr_err("start %llx end %llx\n",start,end);
+		//pr_err("start 0x%llx end 0x%llx\n",start,end);
 		count += __free_memory_core(start, end);
 	}
 
