@@ -918,9 +918,7 @@ continue_merging:
 	while (order < max_order - 1) {
 		buddy_pfn = __find_buddy_pfn(pfn, order);
 		buddy = page + (buddy_pfn - pfn);
-		
 		mprint("order %d buddy_pfn %lx,page %llx, pfn %lx, buddy %llx\n",order,buddy_pfn,(u64)page,pfn,(u64)buddy);
-
 		if (!pfn_valid_within(buddy_pfn))
 		{
 			mprint("buddy_pfn is invalid\n");
@@ -957,13 +955,14 @@ continue_merging:
 		 * We don't want to hit this code for the more frequent
 		 * low-order merging.
 		 */
+		mprint("has_isolate_pageblock(zone) %d\n",has_isolate_pageblock(zone));
 		if (unlikely(has_isolate_pageblock(zone))) {
 			int buddy_mt;
 
 			buddy_pfn = __find_buddy_pfn(pfn, order);
 			buddy = page + (buddy_pfn - pfn);
 			buddy_mt = get_pageblock_migratetype(buddy);
-
+			mprint("order %d buddy_pfn %lx,page %llx, pfn %lx, buddy %llx\n",order,buddy_pfn,(u64)page,pfn,(u64)buddy);
 			if (migratetype != buddy_mt
 					&& (is_migrate_isolate(migratetype) ||
 						is_migrate_isolate(buddy_mt)))
@@ -1384,8 +1383,6 @@ static void __free_pages_ok(struct page *page, unsigned int order)
 	unsigned long flags;
 	int migratetype;
 	unsigned long pfn = page_to_pfn(page);
-
-	mprint("page %llx,pfn %lx order %d\n",(u64)page,pfn,order);
 
 	if (!free_pages_prepare(page, order, true))
 		return;

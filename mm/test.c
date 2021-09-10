@@ -121,10 +121,15 @@ void print_order(int order)
                pfn = page_to_pfn(page);
                counter ++ ;
                pr_info("order %d %15s[%d] counter %d, pfn %lx\n",order,migratetype_names[j],j,counter,pfn);
+               if(10 == order)
+                  break;
             }
          }
          else
+         {
+            pfn = 0;
             pr_info("order %d %15s[%d] counter %d, pfn %lx\n",order,migratetype_names[j],j,counter,pfn);
+         }
 
       }
 		spin_unlock_irqrestore(&pzone->lock, flags);
@@ -282,38 +287,40 @@ extern void setup_per_zone_wmarks(void);
 int __init mem_test(void)
 {
    int i=0;
-    struct page *page1 = NULL;
-   // struct page *page2 = NULL;
-   // struct page *page3 = NULL;
+   struct page *page1 = NULL;
+   struct page *page2 = NULL;
+   struct page *page3 = NULL;
    pr_info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> test +++++++++++++++++++++++++++++++\n");
    // alloc_prepare();
    // print_node();
    // alloc_lruvec_pages();
    // print_lruvec(get_lruvec());
    // print_node();
-   print_orders(3,5);
-   set_flag_main(1);
-   //for( i = 0;i<10;i++)
-   //{
-   //   msleep(1000);
-         page1 = alloc_pages(GFP_KERNEL, 3);
-         pr_info("page1 %llx\n",(u64)page1);
-  // }
-   print_orders(3,5);
-   // page2 = alloc_pages(GFP_KERNEL, 4);
+   //set_flag_main(1);
 
-   // print_orders(3,5);
-   // page3 = alloc_pages(GFP_KERNEL, 3);
+   print_orders(7,10);
+   page1 = alloc_pages(GFP_KERNEL, 7);
+   pr_info("I get pfn pfn1 %llx\n",(u64)page_to_pfn(page1));
 
-    //print_orders(3,5);
-   // __free_pages(page1,3);
+   print_orders(7,10);
+   page2 = alloc_pages(GFP_KERNEL, 7);
+   pr_info("I get pfn pfn2 %llx\n",(u64)page_to_pfn(page2));
 
-   // print_orders(3,5);
-   // __free_pages(page2,3);
+   print_orders(7,10);
+   page3 = alloc_pages(GFP_KERNEL, 7);
+   pr_info("I get pfn pfn3 %llx\n",(u64)page_to_pfn(page3));
 
-   // print_orders(3,5);
-   // __free_pages(page3,3);
-   // print_orders(3,5);
+   print_orders(7,10);
+   __free_pages(page1,7);
+
+   print_orders(7,10);
+   __free_pages(page2,7);
+
+   print_orders(7,10);
+   __free_pages(page3,7);
+
+   print_orders(7,10);
+
    print_node();
    //set_flag_main(0);
 	return 0;

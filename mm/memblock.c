@@ -1908,19 +1908,23 @@ static int __init early_memblock(char *p)
 	return 0;
 }
 early_param("memblock", early_memblock);
-
+extern void set_flag_main(int a);
 static void __init __free_pages_memory(unsigned long start, unsigned long end)
 {
 	int order;
 	while (start < end) {
-		//ffs从bit0开始
-		pr_info("__ffs(start) %d\n",__ffs(start));
+		//ffs从bit0开始，查找第一次bit=1的位置
+		//pr_info("__ffs(start) %d\n",__ffs(start));
 		order = min(MAX_ORDER - 1UL, __ffs(start));
 		while (start + (1UL << order) > end)
 			order--;
 
-		pr_err("start_pfn %lx end_pfn %lx,order %d\n",start,end,order);
-
+		//pr_err("start_pfn %lx end_pfn %lx,order %d\n",start,end,order);
+		//if(start >= 0x420f8 && start <= 0x47c00)
+		//	set_flag_main(1);
+		//else
+		//	set_flag_main(0);
+		
 		memblock_free_pages(pfn_to_page(start), start, order);
 
 		start += (1UL << order);
